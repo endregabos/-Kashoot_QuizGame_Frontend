@@ -31,8 +31,16 @@ export default {
           user_password: this.password,
           user_isAdmin: false,
         });
-        this.$router.push({ name: "AdminPanel" });
-      } catch (e) {}
+
+        window.localStorage.setItem("user_id", result.data.user_id);
+        window.localStorage.setItem("user_name", result.data.user_name);
+
+        this.$router.push({ name: "home" });
+      } catch (e) {
+          alert("Eroare!");
+      }
+        //console.log(window.localStorage.getItem("user_id"));
+        //console.log(window.localStorage.getItem("user_name"));
     },
   },
 };

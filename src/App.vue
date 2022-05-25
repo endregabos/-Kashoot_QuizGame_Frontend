@@ -41,6 +41,13 @@
         <span class="mr-2">Sign Up</span>
       </v-btn>
 
+      <v-btn
+        text
+        @click="$router.push({name: 'main' })"
+      >
+        <span class="mr-2">Logout</span>
+      </v-btn>
+
     </v-app-bar>
 
     <v-main>

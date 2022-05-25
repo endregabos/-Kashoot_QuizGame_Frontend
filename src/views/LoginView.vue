@@ -47,13 +47,25 @@
     },
     methods: {
       async login() {
-        try { 
-          var result = await axios.post("http://localhost:8080/api/login");
-          window.localStorage.setItem("id", result.data.id);
-          this.$router.push({ name: "home" });
+        try {  
+          var user = await axios.get("http://localhost:8080/api/login/" + this.name + "/" + this.password);
+          
+          window.localStorage.setItem("user_id", user.data.user_id);
+          window.localStorage.setItem("user_name", user.data.user_name);
+          window.localStorage.setItem("user_is_admin", user.data.user_isAdmin);
+
+            if(window.localStorage.getItem("user_is_admin") == "true"){
+                this.$router.push({ name: "AdminPanel" });
+            }else{
+                this.$router.push({ name: "home" });
+            }
         } catch (e) {
           alert("Credentiale incorecte!");
         }
+
+        //console.log(window.localStorage.getItem("user_id"));
+        //console.log(window.localStorage.getItem("user_name"));
+        //console.log(window.localStorage.getItem("user_is_admin"));
       }
     }
   }
